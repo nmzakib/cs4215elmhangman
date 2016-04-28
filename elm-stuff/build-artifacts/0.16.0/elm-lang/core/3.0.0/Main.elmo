@@ -1,0 +1,291 @@
+Elm.Main = Elm.Main || {};
+Elm.Main.make = function (_elm) {
+   "use strict";
+   _elm.Main = _elm.Main || {};
+   if (_elm.Main.values) return _elm.Main.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Char = Elm.Char.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Events = Elm.Html.Events.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Now = Elm.Now.make(_elm),
+   $Random = Elm.Random.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $StartApp$Simple = Elm.StartApp.Simple.make(_elm),
+   $String = Elm.String.make(_elm);
+   var _op = {};
+   var replace = F3(function (letter,answer,shown) {
+      var helper = F4(function (letter,answer,shown,acc) {
+         helper: while (true) {
+            var _p0 = {ctor: "_Tuple2"
+                      ,_0: $String.uncons(answer)
+                      ,_1: $String.uncons(shown)};
+            if (_p0._0.ctor === "Just" && _p0._0._0.ctor === "_Tuple2" && _p0._1.ctor === "Just" && _p0._1._0.ctor === "_Tuple2")
+            {
+                  var _p3 = _p0._0._0._1;
+                  var _p2 = _p0._1._0._1;
+                  var _p1 = _p0._0._0._0;
+                  if (_U.eq($String.fromChar(_p1),letter)) {
+                        var _v1 = letter,
+                        _v2 = _p3,
+                        _v3 = _p2,
+                        _v4 = A2($Basics._op["++"],acc,$String.fromChar(_p1));
+                        letter = _v1;
+                        answer = _v2;
+                        shown = _v3;
+                        acc = _v4;
+                        continue helper;
+                     } else {
+                        var _v5 = letter,
+                        _v6 = _p3,
+                        _v7 = _p2,
+                        _v8 = A2($Basics._op["++"],acc,$String.fromChar(_p0._1._0._0));
+                        letter = _v5;
+                        answer = _v6;
+                        shown = _v7;
+                        acc = _v8;
+                        continue helper;
+                     }
+               } else {
+                  return acc;
+               }
+         }
+      });
+      return A4(helper,letter,answer,shown,"");
+   });
+   var message = function (model) {
+      var _p4 = model.state;
+      if (_p4.ctor === "Playing") {
+            return A2($Basics._op["++"],
+            "You have ",
+            A2($Basics._op["++"],
+            $Basics.toString(model.maxAttempts - model.attempts),
+            " attempts left"));
+         } else {
+            return A2($Basics._op["++"],
+            "Game Over!!! The answer is ",
+            model.answer);
+         }
+   };
+   var NewGame = {ctor: "NewGame"};
+   var Guess = function (a) {    return {ctor: "Guess",_0: a};};
+   var view = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([A2($Html.div,
+              _U.list([]),
+              _U.list([$Html.text(model.shown)]))
+              ,A2($Html.div,
+              _U.list([]),
+              _U.list([$Html.text(A2($Basics._op["++"],
+              "Attempted letters: ",
+              model.attempted))]))
+              ,A2($Html.div,_U.list([]),_U.list([$Html.text(message(model))]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("q"))]),
+              _U.list([$Html.text("q")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("w"))]),
+              _U.list([$Html.text("w")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("e"))]),
+              _U.list([$Html.text("e")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("r"))]),
+              _U.list([$Html.text("r")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("t"))]),
+              _U.list([$Html.text("t")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("y"))]),
+              _U.list([$Html.text("y")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("u"))]),
+              _U.list([$Html.text("u")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("i"))]),
+              _U.list([$Html.text("i")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("o"))]),
+              _U.list([$Html.text("o")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("p"))]),
+              _U.list([$Html.text("p")]))
+              ,A2($Html.div,_U.list([]),_U.list([]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("a"))]),
+              _U.list([$Html.text("a")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("s"))]),
+              _U.list([$Html.text("s")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("d"))]),
+              _U.list([$Html.text("d")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("f"))]),
+              _U.list([$Html.text("f")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("g"))]),
+              _U.list([$Html.text("g")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("h"))]),
+              _U.list([$Html.text("h")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("j"))]),
+              _U.list([$Html.text("j")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("k"))]),
+              _U.list([$Html.text("k")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("l"))]),
+              _U.list([$Html.text("l")]))
+              ,A2($Html.div,_U.list([]),_U.list([]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("z"))]),
+              _U.list([$Html.text("z")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("x"))]),
+              _U.list([$Html.text("x")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("c"))]),
+              _U.list([$Html.text("c")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("v"))]),
+              _U.list([$Html.text("v")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("b"))]),
+              _U.list([$Html.text("b")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("n"))]),
+              _U.list([$Html.text("n")]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,Guess("m"))]),
+              _U.list([$Html.text("m")]))
+              ,A2($Html.div,_U.list([]),_U.list([]))
+              ,A2($Html.button,
+              _U.list([A2($Html$Events.onClick,address,NewGame)]),
+              _U.list([$Html.text("New Game")]))]));
+   });
+   var get = F2(function (n,xs) {
+      return $List.head(A2($List.drop,n,xs));
+   });
+   var words = _U.list(["abacus"
+                       ,"banana"
+                       ,"candle"
+                       ,"dinosaur"
+                       ,"ethereal"
+                       ,"friends"
+                       ,"gurgle"
+                       ,"heightened"
+                       ,"interior"
+                       ,"jumbled"
+                       ,"kickstart"
+                       ,"longitudinal"
+                       ,"memory"
+                       ,"navigate"
+                       ,"operation"
+                       ,"pasta"
+                       ,"quivering"
+                       ,"roster"
+                       ,"sophisticated"
+                       ,"truncate"
+                       ,"underline"
+                       ,"viridian"
+                       ,"warlord"
+                       ,"xylophone"
+                       ,"yonder"
+                       ,"zombie"]);
+   var getWord = function (seed) {
+      var _p5 = A2($Random.generate,A2($Random.$int,0,25),seed);
+      var _p6 = A2(get,_p5._0,words);
+      if (_p6.ctor === "Just") {
+            return _p6._0;
+         } else {
+            return "";
+         }
+   };
+   var toUnderscores = function (string) {
+      return A2($String.map,
+      function (c) {
+         return _U.chr("_");
+      },
+      string);
+   };
+   var Over = {ctor: "Over"};
+   var Playing = {ctor: "Playing"};
+   var init = F2(function (maxAttempts,seed) {
+      return {answer: getWord(seed)
+             ,shown: toUnderscores(getWord(seed))
+             ,attempted: ""
+             ,attempts: 0
+             ,maxAttempts: maxAttempts
+             ,state: Playing
+             ,seed: seed};
+   });
+   var update = F2(function (action,model) {
+      var _p7 = action;
+      if (_p7.ctor === "Guess") {
+            var _p8 = _p7._0;
+            return _U.eq(model.state,Playing) ? A2($String.contains,
+            _p8,
+            model.answer) ? _U.eq(A3(replace,_p8,model.answer,model.shown),
+            model.answer) ? _U.update(model,
+            {shown: A3(replace,_p8,model.answer,model.shown)
+            ,state: Over}) : _U.update(model,
+            {shown: A3(replace,
+            _p8,
+            model.answer,
+            model.shown)}) : A2($String.contains,
+            _p8,
+            model.attempted) ? model : _U.eq(model.attempts + 1,
+            model.maxAttempts) ? _U.update(model,
+            {attempts: model.attempts + 1
+            ,attempted: A2($Basics._op["++"],model.attempted,_p8)
+            ,state: Over}) : _U.update(model,
+            {attempts: model.attempts + 1
+            ,attempted: A2($Basics._op["++"],model.attempted,_p8)}) : model;
+         } else {
+            return A2(init,
+            10,
+            $Basics.snd(A2($Random.generate,
+            A2($Random.$int,0,25),
+            model.seed)));
+         }
+   });
+   var Model = F7(function (a,b,c,d,e,f,g) {
+      return {answer: a
+             ,shown: b
+             ,attempted: c
+             ,attempts: d
+             ,maxAttempts: e
+             ,state: f
+             ,seed: g};
+   });
+   var display = function (keyCode) {
+      return $Basics.toString($Char.fromCode(keyCode));
+   };
+   var main = $StartApp$Simple.start({model: A2(init,
+                                     10,
+                                     $Random.initialSeed($Basics.round($Now.loadTime)))
+                                     ,update: update
+                                     ,view: view});
+   return _elm.Main.values = {_op: _op
+                             ,main: main
+                             ,display: display
+                             ,Model: Model
+                             ,Playing: Playing
+                             ,Over: Over
+                             ,init: init
+                             ,toUnderscores: toUnderscores
+                             ,words: words
+                             ,get: get
+                             ,getWord: getWord
+                             ,Guess: Guess
+                             ,NewGame: NewGame
+                             ,update: update
+                             ,message: message
+                             ,replace: replace
+                             ,view: view};
+};

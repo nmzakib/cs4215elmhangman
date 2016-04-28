@@ -1,0 +1,11 @@
+Elm.Now = Elm.Now || {};
+Elm.Now.make = function (_elm) {
+   "use strict";
+   _elm.Now = _elm.Now || {};
+   if (_elm.Now.values) return _elm.Now.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Native$Now = Elm.Native.Now.make(_elm);
+   var _op = {};
+   var loadTime = $Native$Now.loadTime;
+   return _elm.Now.values = {_op: _op,loadTime: loadTime};
+};
